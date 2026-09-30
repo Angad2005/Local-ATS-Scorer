@@ -1,0 +1,38 @@
+server:
+  port: ${PORT:8081}
+
+spring:
+  config:
+    import: "optional:file:./.env[.properties],optional:file:../.env[.properties]"
+  datasource:
+    url: jdbc:h2:file:./data/ats;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+app:
+  scoring:
+    required-skills-weight: ${SCORING_REQUIRED_SKILLS_WEIGHT:40}
+    preferred-skills-weight: ${SCORING_PREFERRED_SKILLS_WEIGHT:15}
+    experience-weight: ${SCORING_EXPERIENCE_WEIGHT:15}
+    project-weight: ${SCORING_PROJECT_WEIGHT:10}
+    education-weight: ${SCORING_EDUCATION_WEIGHT:5}
+    semantic-weight: ${SCORING_SEMANTIC_WEIGHT:10}
+    readability-weight: ${SCORING_READABILITY_WEIGHT:5}
+  lm-studio:
+    base-url: ${LM_STUDIO_BASE_URL:http://localhost:1234/v1}
+    model: ${LM_STUDIO_MODEL:llama-3.1-8b-instruct}
+    embedding-model: ${LM_STUDIO_EMBED_MODEL:nomic-embed-text-v1.5}
+    api-key: ${LM_STUDIO_API_KEY:}
+
+logging:
+  level:
+    com.morrow.ats: INFO

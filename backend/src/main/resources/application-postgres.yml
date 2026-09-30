@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/ats}
+    driver-class-name: org.postgresql.Driver
+    username: ${DATABASE_USER:ats}
+    password: ${DATABASE_PASSWORD:ats}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
